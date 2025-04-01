@@ -7,7 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 flex justify-center items-center h-screen">
-    <div id="quiz-container" class="bg-white p-6 rounded-lg shadow-lg w-96">
+    <div id="welcome-screen" class="flex flex-col items-center">
+        <h1 class="text-3xl font-bold mb-4">Welcome to the Kakashi Website</h1>
+        <button id="start-btn" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Nokara Puka</button>
+    </div>
+
+    <div id="quiz-container" class="bg-white p-6 rounded-lg shadow-lg w-96 hidden">
         <h1 class="text-2xl font-bold text-center mb-4">IQ Test</h1>
         <p id="question" class="text-lg mb-4">Loading...</p>
         <div id="options" class="flex flex-col space-y-2"></div>
@@ -29,11 +34,19 @@
         ];
         
         let currentQuestion = 0;
+        const welcomeScreen = document.getElementById("welcome-screen");
+        const startButton = document.getElementById("start-btn");
         const quizContainer = document.getElementById("quiz-container");
         const questionElement = document.getElementById("question");
         const optionsContainer = document.getElementById("options");
         const nextButton = document.getElementById("next-btn");
         const loadingScreen = document.getElementById("loading-screen");
+
+        startButton.addEventListener("click", () => {
+            welcomeScreen.classList.add("hidden");
+            quizContainer.classList.remove("hidden");
+            loadQuestion();
+        });
 
         function loadQuestion() {
             if (currentQuestion < questions.length) {
@@ -63,8 +76,6 @@
             nextButton.classList.add("hidden");
             loadQuestion();
         });
-
-        loadQuestion();
     </script>
 </body>
-</html> 
+</html>
